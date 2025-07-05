@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const questions = await ScraperService.scrapeQuestions({
             topic: job.topic,
             keyword: job.keyword,
-            timeFilter: job.timeFilter || undefined,
+            timeFilter: job.timeFilter === 'all-time' ? undefined : job.timeFilter || undefined,
             limit: job.questionLimit || 20,
           });
 

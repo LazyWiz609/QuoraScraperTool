@@ -17,7 +17,7 @@ const Input: React.FC = () => {
   const [formData, setFormData] = useState({
     topic: '',
     keyword: '',
-    timeFilter: '',
+    timeFilter: 'all-time',
     questionLimit: 20,
     geminiApiKey: '',
   });
@@ -81,7 +81,7 @@ const Input: React.FC = () => {
   ];
 
   const timeFilterOptions = [
-    { value: '', label: 'All Time' },
+    { value: 'all-time', label: 'All Time' },
     { value: 'past-week', label: 'Past Week' },
     { value: 'past-month', label: 'Past Month' },
     { value: 'past-year', label: 'Past Year' },
