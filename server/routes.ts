@@ -302,9 +302,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         id: job.id,
         type: job.status === "completed" ? "scraping_completed" : "scraping_started",
         title: job.status === "completed" ? 
-          `${job.topic} scraping completed` : 
-          `${job.topic} scraping started`,
-        subtitle: `${job.keyword} keywords`,
+          `${job.topic.charAt(0).toUpperCase() + job.topic.slice(1)} Questions Generated` : 
+          `${job.topic.charAt(0).toUpperCase() + job.topic.slice(1)} Scraping Started`,
+        subtitle: `Keywords: "${job.keyword}" • ${job.questionLimit || 20} questions`,
         timestamp: job.createdAt,
       }));
 

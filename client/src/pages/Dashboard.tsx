@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -16,6 +16,8 @@ import {
 } from 'lucide-react';
 
 const Dashboard: React.FC = () => {
+  const [, setLocation] = useLocation();
+  
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['/api/dashboard/stats'],
   });
@@ -157,9 +159,18 @@ const Dashboard: React.FC = () => {
                       <p className="text-xs text-gray-500">{item.subtitle}</p>
                     </div>
                   </div>
-                  <span className="text-xs text-gray-500">
-                    {formatTimeAgo(item.timestamp)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setLocation(`/answers/${item.id}`)}
+                    >
+                      View Answers
+                    </Button>
+                    <span className="text-xs text-gray-500">
+                      {formatTimeAgo(item.timestamp)}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
