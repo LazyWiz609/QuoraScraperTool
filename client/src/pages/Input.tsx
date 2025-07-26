@@ -82,9 +82,10 @@ const Input: React.FC = () => {
 
   const timeFilterOptions = [
     { value: 'all-time', label: 'All Time' },
-    { value: 'past-week', label: 'Past Week' },
-    { value: 'past-month', label: 'Past Month' },
-    { value: 'past-year', label: 'Past Year' },
+    { value: 'day', label: 'Past Day' },
+    { value: 'week', label: 'Past Week' },
+    { value: 'month', label: 'Past Month' },
+    { value: 'year', label: 'Past Year' },
   ];
 
   return (
@@ -175,7 +176,7 @@ const Input: React.FC = () => {
               <p className="text-xs text-gray-500 mt-1">Maximum 100 questions per job</p>
             </div>
 
-            {/* API Configuration */}
+            {/* API Configuration
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-sm font-medium text-gray-900 mb-3">AI Configuration</h3>
               <div>
@@ -192,7 +193,7 @@ const Input: React.FC = () => {
                   Required for AI answer generation
                 </p>
               </div>
-            </div>
+            </div> */}
 
             {/* Action Buttons */}
             <div className="flex justify-end space-x-4">

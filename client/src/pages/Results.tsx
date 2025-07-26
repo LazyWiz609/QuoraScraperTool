@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
 import { useToast } from '@/hooks/use-toast';
 import Loading from '@/components/ui/loading';
+import type { JobResponse } from '@/types/api';
 import { Bot, ExternalLink } from 'lucide-react';
 
 const Results: React.FC = () => {
@@ -21,14 +22,25 @@ const Results: React.FC = () => {
 
   const jobId = params?.jobId ? parseInt(params.jobId) : null;
 
-  const { data: jobData, isLoading, error } = useQuery({
-    queryKey: [`/api/jobs/${jobId}`],
-    enabled: !!jobId,
-    refetchInterval: (data) => {
-      // Keep refetching if job is still processing
-      return data?.job?.status === 'processing' ? 2000 : false;
-    },
-  });
+  const {
+  data: jobData,
+  isLoading,
+  error,
+  refetch,
+} = useQuery<JobResponse, Error>({
+  queryKey: [`/api/jobs/${jobId}`],
+  queryFn: async () => {
+    const res = await apiRequest("GET", `/api/jobs/${jobId}`);
+    return res.json(); // returns type JobResponse
+  },
+  enabled: !!jobId,
+  refetchInterval: (query) => {
+  const data = query.state.data;
+  return data?.job?.status === 'processing' ? 3000 : false;
+},
+});
+
+
 
   const generateAnswersMutation = useMutation({
     mutationFn: async () => {
@@ -150,13 +162,21 @@ const Results: React.FC = () => {
   const job = jobData?.job;
   const questions = jobData?.questions || [];
 
-  if (job?.status === 'processing') {
-    return (
-      <div className="space-y-6">
-        <Loading message="Scraping Questions..." progress={45} />
-      </div>
-    );
-  }
+  // if (job?.status === 'processing') {
+  //   return (
+  //     <div className="space-y-6">
+  //       <Loading message="Scraping Questions..." progress={45} />
+  //     </div>
+  //   );
+  // }
+  if (job?.status === 'processing' || !jobData?.questions) {
+  return (
+    <div className="space-y-6">
+      <Loading message="Scraping Questions..." progress={45} />
+    </div>
+  );
+}
+
 
   if (job?.status === 'failed') {
     return (

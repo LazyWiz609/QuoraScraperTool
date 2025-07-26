@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useLocation } from 'wouter';
+import { useAuth } from '@/contexts/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,13 +18,17 @@ import {
 
 const Dashboard: React.FC = () => {
   const [, setLocation] = useLocation();
-  
+  const { user } = useAuth();
+  const userId = user?.id;
+
   const { data: stats, isLoading: statsLoading } = useQuery({
-    queryKey: ['/api/dashboard/stats'],
+    queryKey: ['/api/dashboard/stats', userId],
+    enabled: !!userId,
   });
 
   const { data: activity, isLoading: activityLoading } = useQuery({
-    queryKey: ['/api/dashboard/recent-activity'],
+    queryKey: ['/api/dashboard/recent-activity', userId],
+    enabled: !!userId,
   });
 
   const getActivityIcon = (type: string) => {
@@ -160,13 +165,23 @@ const Dashboard: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setLocation(`/answers/${item.id}`)}
-                    >
-                      View Answers
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setLocation(`/questions/${item.id}`)}
+                      >
+                        View Questions
+                      </Button>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => setLocation(`/answers/${item.id}`)}
+                      >
+                        View Answers
+                      </Button>
+                    </div>
+
                     <span className="text-xs text-gray-500">
                       {formatTimeAgo(item.timestamp)}
                     </span>

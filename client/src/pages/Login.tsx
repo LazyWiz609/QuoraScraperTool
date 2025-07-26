@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Bot } from 'lucide-react';
+import { Link } from 'wouter';
+import { queryClient } from '@/lib/queryClient';
 
 const Login: React.FC = () => {
   const { login, isAuthenticated } = useAuth();
@@ -25,6 +27,8 @@ const Login: React.FC = () => {
 
     try {
       await login(username, password);
+      queryClient.clear();
+      queryClient.invalidateQueries();
       toast({
         title: "Success",
         description: "Successfully logged in!",
@@ -86,6 +90,13 @@ const Login: React.FC = () => {
               {loading ? 'Signing in...' : 'Sign in'}
             </Button>
           </form>
+          <div className="text-center mt-4">
+            <Link href="/register">
+              <span className="text-sm text-blue-600 hover:underline">
+                Don’t have an account? Register here
+              </span>
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>

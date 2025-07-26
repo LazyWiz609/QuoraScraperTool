@@ -1,12 +1,16 @@
-import { pgTable, text, serial, integer, boolean, timestamp, json } from "drizzle-orm/pg-core";
-import { createInsertSchema } from "drizzle-zod";
+import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
 import { z } from "zod";
+
+// === Tables ===
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: text("username").notNull().unique(),
   password: text("password").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
+  geminiApiKey: text("gemini_api_key"),
+  quora_email: text("quora_email"),        
+  quora_password: text("quora_password"),
 });
 
 export const scrapingJobs = pgTable("scraping_jobs", {
@@ -16,7 +20,7 @@ export const scrapingJobs = pgTable("scraping_jobs", {
   keyword: text("keyword").notNull(),
   timeFilter: text("time_filter"),
   questionLimit: integer("question_limit").default(20),
-  status: text("status").default("pending"), // pending, processing, completed, failed
+  status: text("status").default("pending"),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -36,26 +40,37 @@ export const answers = pgTable("answers", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+// === Zod Schemas (Manual, stable) ===
+
+export const insertUserSchema = z.object({
+  username: z.string().min(1),
+  password: z.string().min(1),
+  geminiApiKey: z.string().optional(),
+  quora_email: z.string().email().optional(),
+  quora_password: z.string().optional(),
 });
 
-export const insertScrapingJobSchema = createInsertSchema(scrapingJobs).pick({
-  topic: true,
-  keyword: true,
-  timeFilter: true,
-  questionLimit: true,
+export const insertScrapingJobSchema = z.object({
+  topic: z.string().min(1),
+  keyword: z.string().min(1),
+  timeFilter: z.string().optional().nullable(),
+  questionLimit: z.coerce.number().min(1).max(100).optional().nullable(),
+  geminiApiKey: z.string().optional(),
+  quora_email: z.string().email().optional(),
+  quora_password: z.string().optional(),
+})
+  .extend({
+    geminiApiKey: z.string().optional(),
+  });
+
+export const insertQuestionSchema = z.object({
+  question: z.string().min(1),
+  link: z.string().url(),
+  selected: z.boolean().optional().nullable(),
 });
 
-export const insertQuestionSchema = createInsertSchema(questions).pick({
-  question: true,
-  link: true,
-  selected: true,
-});
-
-export const insertAnswerSchema = createInsertSchema(answers).pick({
-  answer: true,
+export const insertAnswerSchema = z.object({
+  answer: z.string().min(1),
 });
 
 export const loginSchema = z.object({
@@ -63,12 +78,19 @@ export const loginSchema = z.object({
   password: z.string().min(1, "Password is required"),
 });
 
+// === Types ===
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
 export type InsertScrapingJob = z.infer<typeof insertScrapingJobSchema>;
 export type ScrapingJob = typeof scrapingJobs.$inferSelect;
+
 export type InsertQuestion = z.infer<typeof insertQuestionSchema>;
 export type Question = typeof questions.$inferSelect;
+
 export type InsertAnswer = z.infer<typeof insertAnswerSchema>;
 export type Answer = typeof answers.$inferSelect;
+
 export type LoginData = z.infer<typeof loginSchema>;
+

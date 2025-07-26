@@ -1,0 +1,211 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Login.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=a5e2afe3"; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.__vite_plugin_react_preamble_installed__) {
+    throw new Error("@vitejs/plugin-react can't detect preamble. Something is wrong. See https://github.com/vitejs/vite-plugin-react/pull/11#discussion_r430879201");
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    RefreshRuntime.register(type, "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx " + id);
+  };
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+var _s = $RefreshSig$();
+import __vite__cjsImport3_react from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/react.js?v=a5e2afe3"; const useState = __vite__cjsImport3_react["useState"];
+import { useAuth } from "/src/contexts/AuthContext.tsx";
+import { Redirect } from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/wouter.js?v=a5e2afe3";
+import { Button } from "/src/components/ui/button.tsx";
+import { Input } from "/src/components/ui/input.tsx";
+import { Label } from "/src/components/ui/label.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "/src/components/ui/card.tsx";
+import { useToast } from "/src/hooks/use-toast.ts";
+import { Bot } from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/lucide-react.js?v=a5e2afe3";
+const Login = () => {
+  _s();
+  const { login, isAuthenticated } = useAuth();
+  const { toast } = useToast();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  if (isAuthenticated) {
+    return /* @__PURE__ */ jsxDEV(Redirect, { to: "/dashboard" }, void 0, false, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+      lineNumber: 19,
+      columnNumber: 12
+    }, this);
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await login(username, password);
+      toast({
+        title: "Success",
+        description: "Successfully logged in!"
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Invalid credentials. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  return /* @__PURE__ */ jsxDEV("div", { className: "min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxDEV(Card, { className: "w-full max-w-md", children: [
+    /* @__PURE__ */ jsxDEV(CardHeader, { className: "text-center", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "flex justify-center mb-4", children: /* @__PURE__ */ jsxDEV(Bot, { className: "h-16 w-16 text-blue-600" }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+        lineNumber: 48,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+        lineNumber: 47,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV(CardTitle, { className: "text-3xl font-bold text-gray-900", children: "Admin Login" }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+        lineNumber: 50,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV("p", { className: "text-sm text-gray-600", children: "Sign in to access the Quora AI Scraper dashboard" }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+        lineNumber: 51,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+      lineNumber: 46,
+      columnNumber: 9
+    }, this),
+    /* @__PURE__ */ jsxDEV(CardContent, { children: /* @__PURE__ */ jsxDEV("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "space-y-4", children: [
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "username", children: "Username" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+            lineNumber: 59,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(
+            Input,
+            {
+              id: "username",
+              type: "text",
+              value: username,
+              onChange: (e) => setUsername(e.target.value),
+              required: true,
+              className: "mt-1"
+            },
+            void 0,
+            false,
+            {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+              lineNumber: 60,
+              columnNumber: 17
+            },
+            this
+          )
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+          lineNumber: 58,
+          columnNumber: 15
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "password", children: "Password" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+            lineNumber: 70,
+            columnNumber: 17
+          }, this),
+          /* @__PURE__ */ jsxDEV(
+            Input,
+            {
+              id: "password",
+              type: "password",
+              value: password,
+              onChange: (e) => setPassword(e.target.value),
+              required: true,
+              className: "mt-1"
+            },
+            void 0,
+            false,
+            {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+              lineNumber: 71,
+              columnNumber: 17
+            },
+            this
+          )
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+          lineNumber: 69,
+          columnNumber: 15
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+        lineNumber: 57,
+        columnNumber: 13
+      }, this),
+      /* @__PURE__ */ jsxDEV(
+        Button,
+        {
+          type: "submit",
+          disabled: loading,
+          className: "w-full",
+          children: loading ? "Signing in..." : "Sign in"
+        },
+        void 0,
+        false,
+        {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+          lineNumber: 81,
+          columnNumber: 13
+        },
+        this
+      )
+    ] }, void 0, true, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+      lineNumber: 56,
+      columnNumber: 11
+    }, this) }, void 0, false, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+      lineNumber: 55,
+      columnNumber: 9
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+    lineNumber: 45,
+    columnNumber: 7
+  }, this) }, void 0, false, {
+    fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx",
+    lineNumber: 44,
+    columnNumber: 5
+  }, this);
+};
+_s(Login, "MIrFFAWFD9Ib/Spfq9yGbo1T6nQ=", false, function() {
+  return [useAuth, useToast];
+});
+_c = Login;
+export default Login;
+var _c;
+$RefreshReg$(_c, "Login");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Login.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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LGNBQ0MsSUFBRztBQUFBLGNBQ0gsTUFBSztBQUFBLGNBQ0wsT0FBT1o7QUFBQUEsY0FDUCxVQUFVLENBQUNLLE1BQU1KLFlBQVlJLEVBQUVNLE9BQU9DLEtBQUs7QUFBQSxjQUMzQztBQUFBLGNBQ0EsV0FBVTtBQUFBO0FBQUEsWUFOWjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsVUFNa0I7QUFBQSxhQVJwQjtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBVUE7QUFBQSxXQXRCRjtBQUFBO0FBQUE7QUFBQTtBQUFBLGFBdUJBO0FBQUEsTUFDQTtBQUFBLFFBQUM7QUFBQTtBQUFBLFVBQ0MsTUFBSztBQUFBLFVBQ0wsVUFBVVY7QUFBQUEsVUFDVixXQUFVO0FBQUEsVUFFVEEsb0JBQVUsa0JBQWtCO0FBQUE7QUFBQSxRQUwvQjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsTUFNQTtBQUFBLFNBL0JGO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0FnQ0EsS0FqQ0Y7QUFBQTtBQUFBO0FBQUE7QUFBQSxXQWtDQTtBQUFBLE9BNUNGO0FBQUE7QUFBQTtBQUFBO0FBQUEsU0E2Q0EsS0E5Q0Y7QUFBQTtBQUFBO0FBQUE7QUFBQSxTQStDQTtBQUVKO0FBQUVSLEdBbEZJRCxPQUFlO0FBQUEsVUFDZ0JYLFNBQ2pCUyxRQUFRO0FBQUE7QUFBQXNCLEtBRnRCcEI7QUFvRk4sZUFBZUE7QUFBTSxJQUFBb0I7QUFBQUMsYUFBQUQsSUFBQSIsIm5hbWVzIjpbInVzZVN0YXRlIiwidXNlQXV0aCIsIlJlZGlyZWN0IiwiQnV0dG9uIiwiSW5wdXQiLCJMYWJlbCIsIkNhcmQiLCJDYXJkQ29udGVudCIsIkNhcmRIZWFkZXIiLCJDYXJkVGl0bGUiLCJ1c2VUb2FzdCIsIkJvdCIsIkxvZ2luIiwiX3MiLCJsb2dpbiIsImlzQXV0aGVudGljYXRlZCIsInRvYXN0IiwidXNlcm5hbWUiLCJzZXRVc2VybmFtZSIsInBhc3N3b3JkIiwic2V0UGFzc3dvcmQiLCJsb2FkaW5nIiwic2V0TG9hZGluZyIsImhhbmRsZVN1Ym1pdCIsImUiLCJwcmV2ZW50RGVmYXVsdCIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJlcnJvciIsInZhcmlhbnQiLCJ0YXJnZXQiLCJ2YWx1ZSIsIl9jIiwiJFJlZnJlc2hSZWckIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIkxvZ2luLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyB1c2VBdXRoIH0gZnJvbSAnQC9jb250ZXh0cy9BdXRoQ29udGV4dCc7XG5pbXBvcnQgeyBSZWRpcmVjdCB9IGZyb20gJ3dvdXRlcic7XG5pbXBvcnQgeyBCdXR0b24gfSBmcm9tICdAL2NvbXBvbmVudHMvdWkvYnV0dG9uJztcbmltcG9ydCB7IElucHV0IH0gZnJvbSAnQC9jb21wb25lbnRzL3VpL2lucHV0JztcbmltcG9ydCB7IExhYmVsIH0gZnJvbSAnQC9jb21wb25lbnRzL3VpL2xhYmVsJztcbmltcG9ydCB7IENhcmQsIENhcmRDb250ZW50LCBDYXJkSGVhZGVyLCBDYXJkVGl0bGUgfSBmcm9tICdAL2NvbXBvbmVudHMvdWkvY2FyZCc7XG5pbXBvcnQgeyB1c2VUb2FzdCB9IGZyb20gJ0AvaG9va3MvdXNlLXRvYXN0JztcbmltcG9ydCB7IEJvdCB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmNvbnN0IExvZ2luOiBSZWFjdC5GQyA9ICgpID0+IHtcbiAgY29uc3QgeyBsb2dpbiwgaXNBdXRoZW50aWNhdGVkIH0gPSB1c2VBdXRoKCk7XG4gIGNvbnN0IHsgdG9hc3QgfSA9IHVzZVRvYXN0KCk7XG4gIGNvbnN0IFt1c2VybmFtZSwgc2V0VXNlcm5hbWVdID0gdXNlU3RhdGUoJycpO1xuICBjb25zdCBbcGFzc3dvcmQsIHNldFBhc3N3b3JkXSA9IHVzZVN0YXRlKCcnKTtcbiAgY29uc3QgW2xvYWRpbmcsIHNldExvYWRpbmddID0gdXNlU3RhdGUoZmFsc2UpO1xuXG4gIGlmIChpc0F1dGhlbnRpY2F0ZWQpIHtcbiAgICByZXR1cm4gPFJlZGlyZWN0IHRvPVwiL2Rhc2hib2FyZFwiIC8+O1xuICB9XG5cbiAgY29uc3QgaGFuZGxlU3VibWl0ID0gYXN5bmMgKGU6IFJlYWN0LkZvcm1FdmVudCkgPT4ge1xuICAgIGUucHJldmVudERlZmF1bHQoKTtcbiAgICBzZXRMb2FkaW5nKHRydWUpO1xuXG4gICAgdHJ5IHtcbiAgICAgIGF3YWl0IGxvZ2luKHVzZXJuYW1lLCBwYXNzd29yZCk7XG4gICAgICB0b2FzdCh7XG4gICAgICAgIHRpdGxlOiBcIlN1Y2Nlc3NcIixcbiAgICAgICAgZGVzY3JpcHRpb246IFwiU3VjY2Vzc2Z1bGx5IGxvZ2dlZCBpbiFcIixcbiAgICAgIH0pO1xuICAgIH0gY2F0Y2ggKGVycm9yKSB7XG4gICAgICB0b2FzdCh7XG4gICAgICAgIHRpdGxlOiBcIkVycm9yXCIsXG4gICAgICAgIGRlc2NyaXB0aW9uOiBcIkludmFsaWQgY3JlZGVudGlhbHMuIFBsZWFzZSB0cnkgYWdhaW4uXCIsXG4gICAgICAgIHZhcmlhbnQ6IFwiZGVzdHJ1Y3RpdmVcIixcbiAgICAgIH0pO1xuICAgIH0gZmluYWxseSB7XG4gICAgICBzZXRMb2FkaW5nKGZhbHNlKTtcbiAgICB9XG4gIH07XG5cbiAgcmV0dXJuIChcbiAgICA8ZGl2IGNsYXNzTmFtZT1cIm1pbi1oLXNjcmVlbiBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciBiZy1ncmF5LTUwIHB5LTEyIHB4LTQgc206cHgtNiBsZzpweC04XCI+XG4gICAgICA8Q2FyZCBjbGFzc05hbWU9XCJ3LWZ1bGwgbWF4LXctbWRcIj5cbiAgICAgICAgPENhcmRIZWFkZXIgY2xhc3NOYW1lPVwidGV4dC1jZW50ZXJcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1jZW50ZXIgbWItNFwiPlxuICAgICAgICAgICAgPEJvdCBjbGFzc05hbWU9XCJoLTE2IHctMTYgdGV4dC1ibHVlLTYwMFwiIC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPENhcmRUaXRsZSBjbGFzc05hbWU9XCJ0ZXh0LTN4bCBmb250LWJvbGQgdGV4dC1ncmF5LTkwMFwiPkFkbWluIExvZ2luPC9DYXJkVGl0bGU+XG4gICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC1zbSB0ZXh0LWdyYXktNjAwXCI+XG4gICAgICAgICAgICBTaWduIGluIHRvIGFjY2VzcyB0aGUgUXVvcmEgQUkgU2NyYXBlciBkYXNoYm9hcmRcbiAgICAgICAgICA8L3A+XG4gICAgICAgIDwvQ2FyZEhlYWRlcj5cbiAgICAgICAgPENhcmRDb250ZW50PlxuICAgICAgICAgIDxmb3JtIG9uU3VibWl0PXtoYW5kbGVTdWJtaXR9IGNsYXNzTmFtZT1cInNwYWNlLXktNlwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJzcGFjZS15LTRcIj5cbiAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cInVzZXJuYW1lXCI+VXNlcm5hbWU8L0xhYmVsPlxuICAgICAgICAgICAgICAgIDxJbnB1dFxuICAgICAgICAgICAgICAgICAgaWQ9XCJ1c2VybmFtZVwiXG4gICAgICAgICAgICAgICAgICB0eXBlPVwidGV4dFwiXG4gICAgICAgICAgICAgICAgICB2YWx1ZT17dXNlcm5hbWV9XG4gICAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGUpID0+IHNldFVzZXJuYW1lKGUudGFyZ2V0LnZhbHVlKX1cbiAgICAgICAgICAgICAgICAgIHJlcXVpcmVkXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtdC0xXCJcbiAgICAgICAgICAgICAgICAvPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cInBhc3N3b3JkXCI+UGFzc3dvcmQ8L0xhYmVsPlxuICAgICAgICAgICAgICAgIDxJbnB1dFxuICAgICAgICAgICAgICAgICAgaWQ9XCJwYXNzd29yZFwiXG4gICAgICAgICAgICAgICAgICB0eXBlPVwicGFzc3dvcmRcIlxuICAgICAgICAgICAgICAgICAgdmFsdWU9e3Bhc3N3b3JkfVxuICAgICAgICAgICAgICAgICAgb25DaGFuZ2U9eyhlKSA9PiBzZXRQYXNzd29yZChlLnRhcmdldC52YWx1ZSl9XG4gICAgICAgICAgICAgICAgICByZXF1aXJlZFxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibXQtMVwiXG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDxCdXR0b25cbiAgICAgICAgICAgICAgdHlwZT1cInN1Ym1pdFwiXG4gICAgICAgICAgICAgIGRpc2FibGVkPXtsb2FkaW5nfVxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJ3LWZ1bGxcIlxuICAgICAgICAgICAgPlxuICAgICAgICAgICAgICB7bG9hZGluZyA/ICdTaWduaW5nIGluLi4uJyA6ICdTaWduIGluJ31cbiAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgIDwvZm9ybT5cbiAgICAgICAgPC9DYXJkQ29udGVudD5cbiAgICAgIDwvQ2FyZD5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IExvZ2luO1xuIl0sImZpbGUiOiJDOi9Vc2Vycy9BZG1pbi9EZXNrdG9wL1F1b3JhUXVlc3Rpb25TY3JhcGVyL2NsaWVudC9zcmMvcGFnZXMvTG9naW4udHN4In0=

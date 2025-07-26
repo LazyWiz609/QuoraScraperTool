@@ -1,0 +1,113 @@
+{
+   "checksum": "a0e09392f66c551039a284f447c3c175",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13395176750759953",
+            "date_last_used": "13395218138534976",
+            "guid": "f449dc10-cbcc-4f72-b2ad-a4e3752f2c76",
+            "id": "6",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Behance",
+            "type": "url",
+            "url": "https://www.behance.net/"
+         }, {
+            "date_added": "13395176779320329",
+            "date_last_used": "0",
+            "guid": "e2919660-c25d-42c5-a5e5-a7061e4598be",
+            "id": "7",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Dribbble - Discover the World’s Top Designers & Creative Professionals",
+            "type": "url",
+            "url": "https://dribbble.com/"
+         }, {
+            "date_added": "13395176790888710",
+            "date_last_used": "0",
+            "guid": "fe2ce29b-6f32-4b91-8c28-cb0b5f9c66db",
+            "id": "8",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "(370) Pinterest",
+            "type": "url",
+            "url": "https://in.pinterest.com/"
+         }, {
+            "date_added": "13395176843272103",
+            "date_last_used": "0",
+            "guid": "947809aa-d128-4a50-86db-15f3bf0ca207",
+            "id": "9",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Browse Fonts - Google Fonts",
+            "type": "url",
+            "url": "https://fonts.google.com/"
+         }, {
+            "date_added": "13395176901695688",
+            "date_last_used": "0",
+            "guid": "ec25e531-20f7-4820-8a79-74bd49af2537",
+            "id": "10",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Discover community-made templates, plugins, and widgets | Figma",
+            "type": "url",
+            "url": "https://www.figma.com/community"
+         }, {
+            "date_added": "13395215212587557",
+            "date_last_used": "0",
+            "guid": "efb8acf0-d754-4c7b-86b5-320dbca5cf70",
+            "id": "12",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "WhatsApp Web",
+            "type": "url",
+            "url": "https://web.whatsapp.com/"
+         }, {
+            "date_added": "13395393866500091",
+            "date_last_used": "0",
+            "guid": "aa99fb9f-a5f2-4919-9be7-3b26da6deb4c",
+            "id": "14",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Color Hunt - Color Palettes for Designers and Artists",
+            "type": "url",
+            "url": "https://colorhunt.co/"
+         } ],
+         "date_added": "13395130116564965",
+         "date_last_used": "0",
+         "date_modified": "13395393866500091",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13395130116564971",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13395130116564994",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

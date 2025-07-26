@@ -1,55 +1,88 @@
-import React from 'react';
-import { useRoute, useLocation } from 'wouter';
-import { useQuery } from '@tanstack/react-query';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb';
-import { useToast } from '@/hooks/use-toast';
-import Loading from '@/components/ui/loading';
-import { FileText, HelpCircle, Bot, ExternalLink } from 'lucide-react';
+import React from "react";
+import { useRoute, useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { useToast } from "@/hooks/use-toast";
+import Loading from "@/components/ui/loading";
+import { FileText, HelpCircle, Bot, ExternalLink } from "lucide-react";
+
+type AnswerWithQuestion = {
+  id: number;
+  answer: string;
+  question: {
+    id: number;
+    question: string;
+    link: string;
+  };
+};
+
+type AnswersResponse = {
+  answers: AnswerWithQuestion[];
+};
 
 const Answers: React.FC = () => {
-  const [match, params] = useRoute('/answers/:jobId');
+  const [match, params] = useRoute("/answers/:jobId");
   const [, setLocation] = useLocation();
   const { toast } = useToast();
 
   const jobId = params?.jobId ? parseInt(params.jobId) : null;
 
-  const { data: answersData, isLoading, error } = useQuery({
+  const {
+    data: answersData,
+    isLoading,
+    error,
+  } = useQuery<AnswersResponse>({
     queryKey: [`/api/jobs/${jobId}/answers`],
+    queryFn: async () => {
+      const res = await fetch(`/api/jobs/${jobId}/answers`, {
+        credentials: "include",
+      });
+      if (!res.ok) throw new Error("Failed to fetch answers");
+      return res.json();
+    },
     enabled: !!jobId,
     refetchInterval: (data) => {
-      // Keep refetching if answers are still being generated
       if (!data?.answers || data.answers.length === 0) {
-        return 2000;
+        return 2000; // Polling until answers arrive
       }
       return false;
     },
+
+    refetchIntervalInBackground: true,
   });
 
   const handleExportPDF = async () => {
     if (!jobId) return;
-    
+
     try {
       const response = await fetch(`/api/jobs/${jobId}/export-pdf`, {
-        method: 'GET',
-        credentials: 'include',
+        method: "GET",
+        credentials: "include",
       });
-      
+
       if (!response.ok) {
-        throw new Error('Failed to export PDF');
+        throw new Error("Failed to export PDF");
       }
-      
+
       const blob = await response.blob();
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `quora-qa-export-${jobId}.pdf`;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-      
+
       toast({
         title: "Success",
         description: "PDF exported successfully!",
@@ -83,7 +116,7 @@ const Answers: React.FC = () => {
             <div className="text-center">
               <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Answers</h3>
               <p className="text-gray-600">Failed to load answers. Please try again.</p>
-              <Button onClick={() => setLocation('/dashboard')} className="mt-4">
+              <Button onClick={() => setLocation("/dashboard")} className="mt-4">
                 Back to Dashboard
               </Button>
             </div>
@@ -105,7 +138,6 @@ const Answers: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb */}
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -118,7 +150,6 @@ const Answers: React.FC = () => {
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Answers Display */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -127,9 +158,7 @@ const Answers: React.FC = () => {
               <p className="text-gray-600 mt-1">Review and export your Q&A pairs</p>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-500">
-                {answers.length} answers generated
-              </span>
+              <span className="text-sm text-gray-500">{answers.length} answers generated</span>
               <Button onClick={handleExportPDF} className="bg-green-600 hover:bg-green-700">
                 <FileText className="w-4 h-4 mr-2" />
                 Export to PDF
@@ -138,9 +167,8 @@ const Answers: React.FC = () => {
           </div>
         </CardHeader>
         <CardContent>
-          {/* Q&A Pairs */}
           <div className="space-y-6">
-            {answers.map((answerData: any, index: number) => (
+            {answers.map((answerData, index) => (
               <div key={answerData.id} className="border border-gray-200 rounded-lg p-6">
                 <div className="mb-4">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2 flex items-start">

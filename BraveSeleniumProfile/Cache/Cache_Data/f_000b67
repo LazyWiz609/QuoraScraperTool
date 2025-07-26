@@ -1,0 +1,409 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Input.tsx");import __vite__cjsImport0_react_jsxDevRuntime from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=711cb99d"; const Fragment = __vite__cjsImport0_react_jsxDevRuntime["Fragment"]; const jsxDEV = __vite__cjsImport0_react_jsxDevRuntime["jsxDEV"];
+import RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== "undefined" && self instanceof WorkerGlobalScope;
+let prevRefreshReg;
+let prevRefreshSig;
+if (import.meta.hot && !inWebWorker) {
+  if (!window.__vite_plugin_react_preamble_installed__) {
+    throw new Error("@vitejs/plugin-react can't detect preamble. Something is wrong. See https://github.com/vitejs/vite-plugin-react/pull/11#discussion_r430879201");
+  }
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = (type, id) => {
+    RefreshRuntime.register(type, "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx " + id);
+  };
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+var _s = $RefreshSig$();
+import __vite__cjsImport3_react from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/react.js?v=711cb99d"; const useState = __vite__cjsImport3_react["useState"];
+import { useLocation } from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/wouter.js?v=711cb99d";
+import { useMutation } from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/@tanstack_react-query.js?v=711cb99d";
+import { apiRequest } from "/src/lib/queryClient.ts";
+import { Card, CardContent, CardHeader, CardTitle } from "/src/components/ui/card.tsx";
+import { Button } from "/src/components/ui/button.tsx";
+import { Input as InputField } from "/src/components/ui/input.tsx";
+import { Label } from "/src/components/ui/label.tsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "/src/components/ui/select.tsx";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "/src/components/ui/breadcrumb.tsx";
+import { useToast } from "/src/hooks/use-toast.ts";
+import { Play } from "/@fs/C:/Users/Admin/Desktop/QuoraQuestionScraper/node_modules/.vite/deps/lucide-react.js?v=711cb99d";
+const Input = () => {
+  _s();
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    topic: "",
+    keyword: "",
+    timeFilter: "all-time",
+    questionLimit: 20,
+    geminiApiKey: ""
+  });
+  const scrapeMutation = useMutation({
+    mutationFn: async (data) => {
+      const response = await apiRequest("POST", "/api/scrape", data);
+      return response.json();
+    },
+    onSuccess: (data) => {
+      toast({
+        title: "Success",
+        description: "Scraping job started successfully!"
+      });
+      setLocation(`/results/${data.jobId}`);
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to start scraping job. Please try again.",
+        variant: "destructive"
+      });
+    }
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.topic || !formData.keyword) {
+      toast({
+        title: "Error",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+    if (formData.geminiApiKey) {
+    }
+    scrapeMutation.mutate({
+      topic: formData.topic,
+      keyword: formData.keyword,
+      timeFilter: formData.timeFilter || void 0,
+      questionLimit: formData.questionLimit
+    });
+  };
+  const topicOptions = [
+    { value: "mental-health", label: "Mental Health" },
+    { value: "business", label: "Business & Entrepreneurship" },
+    { value: "relationships", label: "Relationships" },
+    { value: "technology", label: "Technology" },
+    { value: "health-fitness", label: "Health & Fitness" },
+    { value: "education", label: "Education" },
+    { value: "career", label: "Career & Jobs" },
+    { value: "finance", label: "Finance & Money" }
+  ];
+  const timeFilterOptions = [
+    { value: "all-time", label: "All Time" },
+    { value: "day", label: "Past Day" },
+    { value: "week", label: "Past Week" },
+    { value: "month", label: "Past Month" },
+    { value: "year", label: "Past Year" }
+  ];
+  return /* @__PURE__ */ jsxDEV("div", { className: "space-y-6", children: [
+    /* @__PURE__ */ jsxDEV(Breadcrumb, { children: /* @__PURE__ */ jsxDEV(BreadcrumbList, { children: [
+      /* @__PURE__ */ jsxDEV(BreadcrumbItem, { children: /* @__PURE__ */ jsxDEV(BreadcrumbLink, { href: "/dashboard", children: "Dashboard" }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 97,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 96,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV(BreadcrumbSeparator, {}, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 99,
+        columnNumber: 11
+      }, this),
+      /* @__PURE__ */ jsxDEV(BreadcrumbItem, { children: /* @__PURE__ */ jsxDEV(BreadcrumbPage, { children: "New Scraping Job" }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 101,
+        columnNumber: 13
+      }, this) }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 100,
+        columnNumber: 11
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+      lineNumber: 95,
+      columnNumber: 9
+    }, this) }, void 0, false, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+      lineNumber: 94,
+      columnNumber: 7
+    }, this),
+    /* @__PURE__ */ jsxDEV(Card, { children: [
+      /* @__PURE__ */ jsxDEV(CardHeader, { children: [
+        /* @__PURE__ */ jsxDEV(CardTitle, { children: "Configure Scraping Parameters" }, void 0, false, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 109,
+          columnNumber: 11
+        }, this),
+        /* @__PURE__ */ jsxDEV("p", { className: "text-gray-600", children: "Set up your Quora question scraping job" }, void 0, false, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 110,
+          columnNumber: 11
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 108,
+        columnNumber: 9
+      }, this),
+      /* @__PURE__ */ jsxDEV(CardContent, { children: /* @__PURE__ */ jsxDEV("form", { onSubmit: handleSubmit, className: "space-y-6", children: [
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "topic", children: "Topic Category *" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 116,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(Select, { value: formData.topic, onValueChange: (value) => setFormData({ ...formData, topic: value }), children: [
+            /* @__PURE__ */ jsxDEV(SelectTrigger, { className: "mt-2", children: /* @__PURE__ */ jsxDEV(SelectValue, { placeholder: "Select a topic..." }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 119,
+              columnNumber: 19
+            }, this) }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 118,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV(SelectContent, { children: topicOptions.map(
+              (option) => /* @__PURE__ */ jsxDEV(SelectItem, { value: option.value, children: option.label }, option.value, false, {
+                fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+                lineNumber: 123,
+                columnNumber: 19
+              }, this)
+            ) }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 121,
+              columnNumber: 17
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 117,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 115,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "keyword", children: "Keywords *" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 133,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(
+            InputField,
+            {
+              id: "keyword",
+              type: "text",
+              value: formData.keyword,
+              onChange: (e) => setFormData({ ...formData, keyword: e.target.value }),
+              placeholder: "e.g., startup, anxiety, productivity",
+              className: "mt-2"
+            },
+            void 0,
+            false,
+            {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 134,
+              columnNumber: 15
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV("p", { className: "text-xs text-gray-500 mt-1", children: "Enter keywords to search within the selected topic" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 142,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 132,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "time-filter", children: "Time Filter" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 149,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(Select, { value: formData.timeFilter, onValueChange: (value) => setFormData({ ...formData, timeFilter: value }), children: [
+            /* @__PURE__ */ jsxDEV(SelectTrigger, { className: "mt-2", children: /* @__PURE__ */ jsxDEV(SelectValue, { placeholder: "Select time filter..." }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 152,
+              columnNumber: 19
+            }, this) }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 151,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV(SelectContent, { children: timeFilterOptions.map(
+              (option) => /* @__PURE__ */ jsxDEV(SelectItem, { value: option.value, children: option.label }, option.value, false, {
+                fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+                lineNumber: 156,
+                columnNumber: 19
+              }, this)
+            ) }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 154,
+              columnNumber: 17
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 150,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 148,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { children: [
+          /* @__PURE__ */ jsxDEV(Label, { htmlFor: "question-limit", children: "Number of Questions" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 166,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(
+            InputField,
+            {
+              id: "question-limit",
+              type: "number",
+              min: "1",
+              max: "100",
+              value: formData.questionLimit,
+              onChange: (e) => setFormData({ ...formData, questionLimit: parseInt(e.target.value) || 20 }),
+              className: "mt-2"
+            },
+            void 0,
+            false,
+            {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 167,
+              columnNumber: 15
+            },
+            this
+          ),
+          /* @__PURE__ */ jsxDEV("p", { className: "text-xs text-gray-500 mt-1", children: "Maximum 100 questions per job" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 176,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 165,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "bg-gray-50 p-4 rounded-lg", children: [
+          /* @__PURE__ */ jsxDEV("h3", { className: "text-sm font-medium text-gray-900 mb-3", children: "AI Configuration" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 181,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV("div", { children: [
+            /* @__PURE__ */ jsxDEV(Label, { htmlFor: "gemini-api-key", children: "Google Gemini API Key" }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 183,
+              columnNumber: 17
+            }, this),
+            /* @__PURE__ */ jsxDEV(
+              InputField,
+              {
+                id: "gemini-api-key",
+                type: "password",
+                value: formData.geminiApiKey,
+                onChange: (e) => setFormData({ ...formData, geminiApiKey: e.target.value }),
+                placeholder: "Enter your Gemini API key",
+                className: "mt-2"
+              },
+              void 0,
+              false,
+              {
+                fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+                lineNumber: 184,
+                columnNumber: 17
+              },
+              this
+            ),
+            /* @__PURE__ */ jsxDEV("p", { className: "text-xs text-gray-500 mt-1", children: "Required for AI answer generation" }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 192,
+              columnNumber: 17
+            }, this)
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 182,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 180,
+          columnNumber: 13
+        }, this),
+        /* @__PURE__ */ jsxDEV("div", { className: "flex justify-end space-x-4", children: [
+          /* @__PURE__ */ jsxDEV(Button, { type: "button", variant: "outline", onClick: () => setLocation("/dashboard"), children: "Cancel" }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 200,
+            columnNumber: 15
+          }, this),
+          /* @__PURE__ */ jsxDEV(Button, { type: "submit", disabled: scrapeMutation.isPending, children: scrapeMutation.isPending ? "Starting..." : /* @__PURE__ */ jsxDEV(Fragment, { children: [
+            /* @__PURE__ */ jsxDEV(Play, { className: "w-4 h-4 mr-2" }, void 0, false, {
+              fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+              lineNumber: 208,
+              columnNumber: 21
+            }, this),
+            "Start Scraping"
+          ] }, void 0, true, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 207,
+            columnNumber: 17
+          }, this) }, void 0, false, {
+            fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+            lineNumber: 203,
+            columnNumber: 15
+          }, this)
+        ] }, void 0, true, {
+          fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+          lineNumber: 199,
+          columnNumber: 13
+        }, this)
+      ] }, void 0, true, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 113,
+        columnNumber: 11
+      }, this) }, void 0, false, {
+        fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+        lineNumber: 112,
+        columnNumber: 9
+      }, this)
+    ] }, void 0, true, {
+      fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+      lineNumber: 107,
+      columnNumber: 7
+    }, this)
+  ] }, void 0, true, {
+    fileName: "C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx",
+    lineNumber: 92,
+    columnNumber: 5
+  }, this);
+};
+_s(Input, "bPSUn4Yqd8rs/xjYDfz2ZBlPIr0=", false, function() {
+  return [useLocation, useToast, useMutation];
+});
+_c = Input;
+export default Input;
+var _c;
+$RefreshReg$(_c, "Input");
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("C:/Users/Admin/Desktop/QuoraQuestionScraper/client/src/pages/Input.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,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UUFBSyxXQUFVLGtCQUFoQjtBQUFBO0FBQUE7QUFBQTtBQUFBLG1CQUE4QjtBQUFBO0FBQUEsZUFEaEM7QUFBQTtBQUFBO0FBQUE7QUFBQSxpQkFHQSxLQVBKO0FBQUE7QUFBQTtBQUFBO0FBQUEsaUJBU0E7QUFBQSxhQWJGO0FBQUE7QUFBQTtBQUFBO0FBQUEsZUFjQTtBQUFBLFdBcEdGO0FBQUE7QUFBQTtBQUFBO0FBQUEsYUFxR0EsS0F0R0Y7QUFBQTtBQUFBO0FBQUE7QUFBQSxhQXVHQTtBQUFBLFNBNUdGO0FBQUE7QUFBQTtBQUFBO0FBQUEsV0E2R0E7QUFBQSxPQTVIRjtBQUFBO0FBQUE7QUFBQTtBQUFBLFNBNkhBO0FBRUo7QUFBRW5DLEdBN01JaEIsT0FBZTtBQUFBLFVBQ0tSLGFBQ05zQixVQVNLckIsV0FBVztBQUFBO0FBQUEyRCxLQVg5QnBEO0FBK01OLGVBQWVBO0FBQU0sSUFBQW9EO0FBQUFDLGFBQUFELElBQUEiLCJuYW1lcyI6WyJ1c2VTdGF0ZSIsInVzZUxvY2F0aW9uIiwidXNlTXV0YXRpb24iLCJhcGlSZXF1ZXN0IiwiQ2FyZCIsIkNhcmRDb250ZW50IiwiQ2FyZEhlYWRlciIsIkNhcmRUaXRsZSIsIkJ1dHRvbiIsIklucHV0IiwiSW5wdXRGaWVsZCIsIkxhYmVsIiwiU2VsZWN0IiwiU2VsZWN0Q29udGVudCIsIlNlbGVjdEl0ZW0iLCJTZWxlY3RUcmlnZ2VyIiwiU2VsZWN0VmFsdWUiLCJCcmVhZGNydW1iIiwiQnJlYWRjcnVtYkl0ZW0iLCJCcmVhZGNydW1iTGluayIsIkJyZWFkY3J1bWJMaXN0IiwiQnJlYWRjcnVtYlBhZ2UiLCJCcmVhZGNydW1iU2VwYXJhdG9yIiwidXNlVG9hc3QiLCJQbGF5IiwiX3MiLCJzZXRMb2NhdGlvbiIsInRvYXN0IiwiZm9ybURhdGEiLCJzZXRGb3JtRGF0YSIsInRvcGljIiwia2V5d29yZCIsInRpbWVGaWx0ZXIiLCJxdWVzdGlvbkxpbWl0IiwiZ2VtaW5pQXBpS2V5Iiwic2NyYXBlTXV0YXRpb24iLCJtdXRhdGlvbkZuIiwiZGF0YSIsInJlc3BvbnNlIiwianNvbiIsIm9uU3VjY2VzcyIsInRpdGxlIiwiZGVzY3JpcHRpb24iLCJqb2JJZCIsIm9uRXJyb3IiLCJlcnJvciIsInZhcmlhbnQiLCJoYW5kbGVTdWJtaXQiLCJlIiwicHJldmVudERlZmF1bHQiLCJtdXRhdGUiLCJ1bmRlZmluZWQiLCJ0b3BpY09wdGlvbnMiLCJ2YWx1ZSIsImxhYmVsIiwidGltZUZpbHRlck9wdGlvbnMiLCJtYXAiLCJvcHRpb24iLCJ0YXJnZXQiLCJwYXJzZUludCIsImlzUGVuZGluZyIsIl9jIiwiJFJlZnJlc2hSZWckIl0sImlnbm9yZUxpc3QiOltdLCJzb3VyY2VzIjpbIklucHV0LnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3QsIHsgdXNlU3RhdGUgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyB1c2VMb2NhdGlvbiB9IGZyb20gJ3dvdXRlcic7XG5pbXBvcnQgeyB1c2VNdXRhdGlvbiB9IGZyb20gJ0B0YW5zdGFjay9yZWFjdC1xdWVyeSc7XG5pbXBvcnQgeyBhcGlSZXF1ZXN0IH0gZnJvbSAnQC9saWIvcXVlcnlDbGllbnQnO1xuaW1wb3J0IHsgQ2FyZCwgQ2FyZENvbnRlbnQsIENhcmRIZWFkZXIsIENhcmRUaXRsZSB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9jYXJkJztcbmltcG9ydCB7IEJ1dHRvbiB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9idXR0b24nO1xuaW1wb3J0IHsgSW5wdXQgYXMgSW5wdXRGaWVsZCB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9pbnB1dCc7XG5pbXBvcnQgeyBMYWJlbCB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9sYWJlbCc7XG5pbXBvcnQgeyBTZWxlY3QsIFNlbGVjdENvbnRlbnQsIFNlbGVjdEl0ZW0sIFNlbGVjdFRyaWdnZXIsIFNlbGVjdFZhbHVlIH0gZnJvbSAnQC9jb21wb25lbnRzL3VpL3NlbGVjdCc7XG5pbXBvcnQgeyBCcmVhZGNydW1iLCBCcmVhZGNydW1iSXRlbSwgQnJlYWRjcnVtYkxpbmssIEJyZWFkY3J1bWJMaXN0LCBCcmVhZGNydW1iUGFnZSwgQnJlYWRjcnVtYlNlcGFyYXRvciB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9icmVhZGNydW1iJztcbmltcG9ydCB7IHVzZVRvYXN0IH0gZnJvbSAnQC9ob29rcy91c2UtdG9hc3QnO1xuaW1wb3J0IHsgUGxheSB9IGZyb20gJ2x1Y2lkZS1yZWFjdCc7XG5cbmNvbnN0IElucHV0OiBSZWFjdC5GQyA9ICgpID0+IHtcbiAgY29uc3QgWywgc2V0TG9jYXRpb25dID0gdXNlTG9jYXRpb24oKTtcbiAgY29uc3QgeyB0b2FzdCB9ID0gdXNlVG9hc3QoKTtcbiAgY29uc3QgW2Zvcm1EYXRhLCBzZXRGb3JtRGF0YV0gPSB1c2VTdGF0ZSh7XG4gICAgdG9waWM6ICcnLFxuICAgIGtleXdvcmQ6ICcnLFxuICAgIHRpbWVGaWx0ZXI6ICdhbGwtdGltZScsXG4gICAgcXVlc3Rpb25MaW1pdDogMjAsXG4gICAgZ2VtaW5pQXBpS2V5OiAnJyxcbiAgfSk7XG5cbiAgY29uc3Qgc2NyYXBlTXV0YXRpb24gPSB1c2VNdXRhdGlvbih7XG4gICAgbXV0YXRpb25GbjogYXN5bmMgKGRhdGE6IGFueSkgPT4ge1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBhcGlSZXF1ZXN0KCdQT1NUJywgJy9hcGkvc2NyYXBlJywgZGF0YSk7XG4gICAgICByZXR1cm4gcmVzcG9uc2UuanNvbigpO1xuICAgIH0sXG4gICAgb25TdWNjZXNzOiAoZGF0YSkgPT4ge1xuICAgICAgdG9hc3Qoe1xuICAgICAgICB0aXRsZTogXCJTdWNjZXNzXCIsXG4gICAgICAgIGRlc2NyaXB0aW9uOiBcIlNjcmFwaW5nIGpvYiBzdGFydGVkIHN1Y2Nlc3NmdWxseSFcIixcbiAgICAgIH0pO1xuICAgICAgc2V0TG9jYXRpb24oYC9yZXN1bHRzLyR7ZGF0YS5qb2JJZH1gKTtcbiAgICB9LFxuICAgIG9uRXJyb3I6IChlcnJvcikgPT4ge1xuICAgICAgdG9hc3Qoe1xuICAgICAgICB0aXRsZTogXCJFcnJvclwiLFxuICAgICAgICBkZXNjcmlwdGlvbjogXCJGYWlsZWQgdG8gc3RhcnQgc2NyYXBpbmcgam9iLiBQbGVhc2UgdHJ5IGFnYWluLlwiLFxuICAgICAgICB2YXJpYW50OiBcImRlc3RydWN0aXZlXCIsXG4gICAgICB9KTtcbiAgICB9LFxuICB9KTtcblxuICBjb25zdCBoYW5kbGVTdWJtaXQgPSAoZTogUmVhY3QuRm9ybUV2ZW50KSA9PiB7XG4gICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xuICAgIFxuICAgIGlmICghZm9ybURhdGEudG9waWMgfHwgIWZvcm1EYXRhLmtleXdvcmQpIHtcbiAgICAgIHRvYXN0KHtcbiAgICAgICAgdGl0bGU6IFwiRXJyb3JcIixcbiAgICAgICAgZGVzY3JpcHRpb246IFwiUGxlYXNlIGZpbGwgaW4gYWxsIHJlcXVpcmVkIGZpZWxkcy5cIixcbiAgICAgICAgdmFyaWFudDogXCJkZXN0cnVjdGl2ZVwiLFxuICAgICAgfSk7XG4gICAgICByZXR1cm47XG4gICAgfVxuXG4gICAgLy8gU2V0IHRoZSBHZW1pbmkgQVBJIGtleSBpbiBlbnZpcm9ubWVudCAoZm9yIGNsaWVudC1zaWRlIHVzYWdlKVxuICAgIGlmIChmb3JtRGF0YS5nZW1pbmlBcGlLZXkpIHtcbiAgICAgIC8vIFRoaXMgd291bGQgbmVlZCB0byBiZSBwYXNzZWQgdG8gdGhlIGJhY2tlbmQgc2VjdXJlbHlcbiAgICAgIC8vIEZvciBub3csIHdlJ2xsIGFzc3VtZSBpdCdzIHNldCBvbiB0aGUgc2VydmVyXG4gICAgfVxuXG4gICAgc2NyYXBlTXV0YXRpb24ubXV0YXRlKHtcbiAgICAgIHRvcGljOiBmb3JtRGF0YS50b3BpYyxcbiAgICAgIGtleXdvcmQ6IGZvcm1EYXRhLmtleXdvcmQsXG4gICAgICB0aW1lRmlsdGVyOiBmb3JtRGF0YS50aW1lRmlsdGVyIHx8IHVuZGVmaW5lZCxcbiAgICAgIHF1ZXN0aW9uTGltaXQ6IGZvcm1EYXRhLnF1ZXN0aW9uTGltaXQsXG4gICAgfSk7XG4gIH07XG5cbiAgY29uc3QgdG9waWNPcHRpb25zID0gW1xuICAgIHsgdmFsdWU6ICdtZW50YWwtaGVhbHRoJywgbGFiZWw6ICdNZW50YWwgSGVhbHRoJyB9LFxuICAgIHsgdmFsdWU6ICdidXNpbmVzcycsIGxhYmVsOiAnQnVzaW5lc3MgJiBFbnRyZXByZW5ldXJzaGlwJyB9LFxuICAgIHsgdmFsdWU6ICdyZWxhdGlvbnNoaXBzJywgbGFiZWw6ICdSZWxhdGlvbnNoaXBzJyB9LFxuICAgIHsgdmFsdWU6ICd0ZWNobm9sb2d5JywgbGFiZWw6ICdUZWNobm9sb2d5JyB9LFxuICAgIHsgdmFsdWU6ICdoZWFsdGgtZml0bmVzcycsIGxhYmVsOiAnSGVhbHRoICYgRml0bmVzcycgfSxcbiAgICB7IHZhbHVlOiAnZWR1Y2F0aW9uJywgbGFiZWw6ICdFZHVjYXRpb24nIH0sXG4gICAgeyB2YWx1ZTogJ2NhcmVlcicsIGxhYmVsOiAnQ2FyZWVyICYgSm9icycgfSxcbiAgICB7IHZhbHVlOiAnZmluYW5jZScsIGxhYmVsOiAnRmluYW5jZSAmIE1vbmV5JyB9LFxuICBdO1xuXG4gIGNvbnN0IHRpbWVGaWx0ZXJPcHRpb25zID0gW1xuICAgIHsgdmFsdWU6ICdhbGwtdGltZScsIGxhYmVsOiAnQWxsIFRpbWUnIH0sXG4gICAgeyB2YWx1ZTogJ2RheScsIGxhYmVsOiAnUGFzdCBEYXknIH0sXG4gICAgeyB2YWx1ZTogJ3dlZWsnLCBsYWJlbDogJ1Bhc3QgV2VlaycgfSxcbiAgICB7IHZhbHVlOiAnbW9udGgnLCBsYWJlbDogJ1Bhc3QgTW9udGgnIH0sXG4gICAgeyB2YWx1ZTogJ3llYXInLCBsYWJlbDogJ1Bhc3QgWWVhcicgfSxcbiAgXTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwic3BhY2UteS02XCI+XG4gICAgICB7LyogQnJlYWRjcnVtYiAqL31cbiAgICAgIDxCcmVhZGNydW1iPlxuICAgICAgICA8QnJlYWRjcnVtYkxpc3Q+XG4gICAgICAgICAgPEJyZWFkY3J1bWJJdGVtPlxuICAgICAgICAgICAgPEJyZWFkY3J1bWJMaW5rIGhyZWY9XCIvZGFzaGJvYXJkXCI+RGFzaGJvYXJkPC9CcmVhZGNydW1iTGluaz5cbiAgICAgICAgICA8L0JyZWFkY3J1bWJJdGVtPlxuICAgICAgICAgIDxCcmVhZGNydW1iU2VwYXJhdG9yIC8+XG4gICAgICAgICAgPEJyZWFkY3J1bWJJdGVtPlxuICAgICAgICAgICAgPEJyZWFkY3J1bWJQYWdlPk5ldyBTY3JhcGluZyBKb2I8L0JyZWFkY3J1bWJQYWdlPlxuICAgICAgICAgIDwvQnJlYWRjcnVtYkl0ZW0+XG4gICAgICAgIDwvQnJlYWRjcnVtYkxpc3Q+XG4gICAgICA8L0JyZWFkY3J1bWI+XG5cbiAgICAgIHsvKiBJbnB1dCBGb3JtICovfVxuICAgICAgPENhcmQ+XG4gICAgICAgIDxDYXJkSGVhZGVyPlxuICAgICAgICAgIDxDYXJkVGl0bGU+Q29uZmlndXJlIFNjcmFwaW5nIFBhcmFtZXRlcnM8L0NhcmRUaXRsZT5cbiAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LWdyYXktNjAwXCI+U2V0IHVwIHlvdXIgUXVvcmEgcXVlc3Rpb24gc2NyYXBpbmcgam9iPC9wPlxuICAgICAgICA8L0NhcmRIZWFkZXI+XG4gICAgICAgIDxDYXJkQ29udGVudD5cbiAgICAgICAgICA8Zm9ybSBvblN1Ym1pdD17aGFuZGxlU3VibWl0fSBjbGFzc05hbWU9XCJzcGFjZS15LTZcIj5cbiAgICAgICAgICAgIHsvKiBUb3BpYyBTZWxlY3Rpb24gKi99XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cInRvcGljXCI+VG9waWMgQ2F0ZWdvcnkgKjwvTGFiZWw+XG4gICAgICAgICAgICAgIDxTZWxlY3QgdmFsdWU9e2Zvcm1EYXRhLnRvcGljfSBvblZhbHVlQ2hhbmdlPXsodmFsdWUpID0+IHNldEZvcm1EYXRhKHsgLi4uZm9ybURhdGEsIHRvcGljOiB2YWx1ZSB9KX0+XG4gICAgICAgICAgICAgICAgPFNlbGVjdFRyaWdnZXIgY2xhc3NOYW1lPVwibXQtMlwiPlxuICAgICAgICAgICAgICAgICAgPFNlbGVjdFZhbHVlIHBsYWNlaG9sZGVyPVwiU2VsZWN0IGEgdG9waWMuLi5cIiAvPlxuICAgICAgICAgICAgICAgIDwvU2VsZWN0VHJpZ2dlcj5cbiAgICAgICAgICAgICAgICA8U2VsZWN0Q29udGVudD5cbiAgICAgICAgICAgICAgICAgIHt0b3BpY09wdGlvbnMubWFwKChvcHRpb24pID0+IChcbiAgICAgICAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0ga2V5PXtvcHRpb24udmFsdWV9IHZhbHVlPXtvcHRpb24udmFsdWV9PlxuICAgICAgICAgICAgICAgICAgICAgIHtvcHRpb24ubGFiZWx9XG4gICAgICAgICAgICAgICAgICAgIDwvU2VsZWN0SXRlbT5cbiAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgIDwvU2VsZWN0Q29udGVudD5cbiAgICAgICAgICAgICAgPC9TZWxlY3Q+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgey8qIEtleXdvcmQgSW5wdXQgKi99XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cImtleXdvcmRcIj5LZXl3b3JkcyAqPC9MYWJlbD5cbiAgICAgICAgICAgICAgPElucHV0RmllbGRcbiAgICAgICAgICAgICAgICBpZD1cImtleXdvcmRcIlxuICAgICAgICAgICAgICAgIHR5cGU9XCJ0ZXh0XCJcbiAgICAgICAgICAgICAgICB2YWx1ZT17Zm9ybURhdGEua2V5d29yZH1cbiAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGUpID0+IHNldEZvcm1EYXRhKHsgLi4uZm9ybURhdGEsIGtleXdvcmQ6IGUudGFyZ2V0LnZhbHVlIH0pfVxuICAgICAgICAgICAgICAgIHBsYWNlaG9sZGVyPVwiZS5nLiwgc3RhcnR1cCwgYW54aWV0eSwgcHJvZHVjdGl2aXR5XCJcbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtdC0yXCJcbiAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWdyYXktNTAwIG10LTFcIj5cbiAgICAgICAgICAgICAgICBFbnRlciBrZXl3b3JkcyB0byBzZWFyY2ggd2l0aGluIHRoZSBzZWxlY3RlZCB0b3BpY1xuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgey8qIFRpbWUgRmlsdGVyICovfVxuICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgPExhYmVsIGh0bWxGb3I9XCJ0aW1lLWZpbHRlclwiPlRpbWUgRmlsdGVyPC9MYWJlbD5cbiAgICAgICAgICAgICAgPFNlbGVjdCB2YWx1ZT17Zm9ybURhdGEudGltZUZpbHRlcn0gb25WYWx1ZUNoYW5nZT17KHZhbHVlKSA9PiBzZXRGb3JtRGF0YSh7IC4uLmZvcm1EYXRhLCB0aW1lRmlsdGVyOiB2YWx1ZSB9KX0+XG4gICAgICAgICAgICAgICAgPFNlbGVjdFRyaWdnZXIgY2xhc3NOYW1lPVwibXQtMlwiPlxuICAgICAgICAgICAgICAgICAgPFNlbGVjdFZhbHVlIHBsYWNlaG9sZGVyPVwiU2VsZWN0IHRpbWUgZmlsdGVyLi4uXCIgLz5cbiAgICAgICAgICAgICAgICA8L1NlbGVjdFRyaWdnZXI+XG4gICAgICAgICAgICAgICAgPFNlbGVjdENvbnRlbnQ+XG4gICAgICAgICAgICAgICAgICB7dGltZUZpbHRlck9wdGlvbnMubWFwKChvcHRpb24pID0+IChcbiAgICAgICAgICAgICAgICAgICAgPFNlbGVjdEl0ZW0ga2V5PXtvcHRpb24udmFsdWV9IHZhbHVlPXtvcHRpb24udmFsdWV9PlxuICAgICAgICAgICAgICAgICAgICAgIHtvcHRpb24ubGFiZWx9XG4gICAgICAgICAgICAgICAgICAgIDwvU2VsZWN0SXRlbT5cbiAgICAgICAgICAgICAgICAgICkpfVxuICAgICAgICAgICAgICAgIDwvU2VsZWN0Q29udGVudD5cbiAgICAgICAgICAgICAgPC9TZWxlY3Q+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgey8qIE51bWJlciBvZiBRdWVzdGlvbnMgKi99XG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8TGFiZWwgaHRtbEZvcj1cInF1ZXN0aW9uLWxpbWl0XCI+TnVtYmVyIG9mIFF1ZXN0aW9uczwvTGFiZWw+XG4gICAgICAgICAgICAgIDxJbnB1dEZpZWxkXG4gICAgICAgICAgICAgICAgaWQ9XCJxdWVzdGlvbi1saW1pdFwiXG4gICAgICAgICAgICAgICAgdHlwZT1cIm51bWJlclwiXG4gICAgICAgICAgICAgICAgbWluPVwiMVwiXG4gICAgICAgICAgICAgICAgbWF4PVwiMTAwXCJcbiAgICAgICAgICAgICAgICB2YWx1ZT17Zm9ybURhdGEucXVlc3Rpb25MaW1pdH1cbiAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGUpID0+IHNldEZvcm1EYXRhKHsgLi4uZm9ybURhdGEsIHF1ZXN0aW9uTGltaXQ6IHBhcnNlSW50KGUudGFyZ2V0LnZhbHVlKSB8fCAyMCB9KX1cbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtdC0yXCJcbiAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyB0ZXh0LWdyYXktNTAwIG10LTFcIj5NYXhpbXVtIDEwMCBxdWVzdGlvbnMgcGVyIGpvYjwvcD5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogQVBJIENvbmZpZ3VyYXRpb24gKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImJnLWdyYXktNTAgcC00IHJvdW5kZWQtbGdcIj5cbiAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cInRleHQtc20gZm9udC1tZWRpdW0gdGV4dC1ncmF5LTkwMCBtYi0zXCI+QUkgQ29uZmlndXJhdGlvbjwvaDM+XG4gICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgPExhYmVsIGh0bWxGb3I9XCJnZW1pbmktYXBpLWtleVwiPkdvb2dsZSBHZW1pbmkgQVBJIEtleTwvTGFiZWw+XG4gICAgICAgICAgICAgICAgPElucHV0RmllbGRcbiAgICAgICAgICAgICAgICAgIGlkPVwiZ2VtaW5pLWFwaS1rZXlcIlxuICAgICAgICAgICAgICAgICAgdHlwZT1cInBhc3N3b3JkXCJcbiAgICAgICAgICAgICAgICAgIHZhbHVlPXtmb3JtRGF0YS5nZW1pbmlBcGlLZXl9XG4gICAgICAgICAgICAgICAgICBvbkNoYW5nZT17KGUpID0+IHNldEZvcm1EYXRhKHsgLi4uZm9ybURhdGEsIGdlbWluaUFwaUtleTogZS50YXJnZXQudmFsdWUgfSl9XG4gICAgICAgICAgICAgICAgICBwbGFjZWhvbGRlcj1cIkVudGVyIHlvdXIgR2VtaW5pIEFQSSBrZXlcIlxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwibXQtMlwiXG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIHRleHQtZ3JheS01MDAgbXQtMVwiPlxuICAgICAgICAgICAgICAgICAgUmVxdWlyZWQgZm9yIEFJIGFuc3dlciBnZW5lcmF0aW9uXG4gICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICB7LyogQWN0aW9uIEJ1dHRvbnMgKi99XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXgganVzdGlmeS1lbmQgc3BhY2UteC00XCI+XG4gICAgICAgICAgICAgIDxCdXR0b24gdHlwZT1cImJ1dHRvblwiIHZhcmlhbnQ9XCJvdXRsaW5lXCIgb25DbGljaz17KCkgPT4gc2V0TG9jYXRpb24oJy9kYXNoYm9hcmQnKX0+XG4gICAgICAgICAgICAgICAgQ2FuY2VsXG4gICAgICAgICAgICAgIDwvQnV0dG9uPlxuICAgICAgICAgICAgICA8QnV0dG9uIHR5cGU9XCJzdWJtaXRcIiBkaXNhYmxlZD17c2NyYXBlTXV0YXRpb24uaXNQZW5kaW5nfT5cbiAgICAgICAgICAgICAgICB7c2NyYXBlTXV0YXRpb24uaXNQZW5kaW5nID8gKFxuICAgICAgICAgICAgICAgICAgJ1N0YXJ0aW5nLi4uJ1xuICAgICAgICAgICAgICAgICkgOiAoXG4gICAgICAgICAgICAgICAgICA8PlxuICAgICAgICAgICAgICAgICAgICA8UGxheSBjbGFzc05hbWU9XCJ3LTQgaC00IG1yLTJcIiAvPlxuICAgICAgICAgICAgICAgICAgICBTdGFydCBTY3JhcGluZ1xuICAgICAgICAgICAgICAgICAgPC8+XG4gICAgICAgICAgICAgICAgKX1cbiAgICAgICAgICAgICAgPC9CdXR0b24+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Zvcm0+XG4gICAgICAgIDwvQ2FyZENvbnRlbnQ+XG4gICAgICA8L0NhcmQ+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBJbnB1dDtcbiJdLCJmaWxlIjoiQzovVXNlcnMvQWRtaW4vRGVza3RvcC9RdW9yYVF1ZXN0aW9uU2NyYXBlci9jbGllbnQvc3JjL3BhZ2VzL0lucHV0LnRzeCJ9
